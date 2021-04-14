@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas:
+    "nav"
+}
+
+.main-nav {
+  grid-area: nav;
+}
