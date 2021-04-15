@@ -1,0 +1,18 @@
+<section class="d-flex card_wrapper">
+  <div class="d-flex-items-center">
+    <picture class="card_image" *ngIf="link.iconURL">
+      <source [srcset]="link.iconURL" />
+      <img
+        [src]="link.iconURL"
+        [alt]="link.title"
+        [attr.width]="link.iconWidth"
+        [attr.height]="link.iconHeight"
+      />
+    </picture>
+  </div>
+</section>
+<section class="card_header">
+  <h3 class="card_title">
+    {{ link.title }}
+  </h3>
+</section>

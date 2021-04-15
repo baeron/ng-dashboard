@@ -1,0 +1,27 @@
+@mixin w-100 {
+  width: 100%;
+}
+
+@mixin d-flex {
+  display: flex;
+}
+
+@mixin d-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin d-flex-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin d-flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin d-flex-all-by-center {
+  display: flex;
+  justify-content: center;
+}
