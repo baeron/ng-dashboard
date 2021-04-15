@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Witbe",
+    "tooltip": "Witbe test dashboard",
+    "linkURL": "http://www.example.com",
+    "iconURL": "https://www.actusnews.com/logos/societes/250_100/ACTUS-0-1108-witbe.png",
+    "iconWidth": "90px",
+    "iconHeight": "40px"
+  },
+  {
+    "title": "Frumos-Test-Data",
+    "tooltip": "Frumos-Test-Data",
+    "linkURL": "https://splunkdev02.sj.tivo.com/en-US/app/qe_tcd_perf/utaf_metric_v2",
+    "iconURL": "https://ok4static.oktacdn.com/fs/bco/4/fs0412emh2sfznxrI1t7",
+    "iconWidth": "104px",
+    "iconHeight": "35px"
+  },
+  {
+    "title": "Health check",
+    "tooltip": "UTAF test dashboard",
+    "linkURL": "https://splunk.engr.tivo.com/en-US/app/qe_tcd_perf/channel_health",
+    "iconURL": "https://ok4static.oktacdn.com/fs/bco/4/fs0412emh2sfznxrI1t7",
+    "iconWidth": "104px",
+    "iconHeight": "35px"
+  },
+  {
+    "title": "Jenkins",
+    "tooltip": "Jenkins",
+    "linkURL": "https://jenkins-qe.engr.tivoservice.net",
+    "iconURL": "https://cdn.iconscout.com/icon/free/png-256/jenkins-282182.png",
+    "iconWidth": "120px",
+    "iconHeight": "120px"
+  }
+]

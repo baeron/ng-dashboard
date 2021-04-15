@@ -1,0 +1,11 @@
+@import '../../../../mixins.scss';
+
+ul {
+  @include d-flex-wrap;
+  @include w-100;
+  list-style-type: none;
+
+  li {
+    margin: 0 1.78em 1.42em 1.78em;
+  }
+}
