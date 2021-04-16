@@ -16,6 +16,14 @@ body {
   @include d-flex;
 }
 
+.d-flex-wrap {
+  @include d-flex-wrap;
+}
+
+.d-flex-wrap-center {
+  @include d-flex-wrap;
+  justify-content: center
+}
 .d-flex-items-center {
   @include d-flex-align-center;
 }

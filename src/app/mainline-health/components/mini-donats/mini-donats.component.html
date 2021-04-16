@@ -1,0 +1,10 @@
+<div class="d-flex-wrap-center">
+  <section *ngFor="let donat of donats">
+    <app-donat-chart
+      [options]="donat"
+      [maxWidth]="width"
+      [maxHeight]="height"
+      [donatSize]="size"
+    ></app-donat-chart>
+  </section>
+</div>

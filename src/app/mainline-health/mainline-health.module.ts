@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { Routes, RouterModule } from '@angular/router'
 import { MainLineHealthContainer } from './container/main-line-health-container/main-line-health-container.component'
 import * as fromComponent from './components'
-import { HighchartsChartModule } from 'highcharts-angular'
+import { HighchartsChartModule } from 'highcharts-angular';
 
 const routes: Routes = [{ path: '', component: MainLineHealthContainer }]
 

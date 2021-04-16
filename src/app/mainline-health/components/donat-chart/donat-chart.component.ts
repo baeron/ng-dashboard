@@ -1,3 +1,4 @@
+import { IDonatOptions } from './../../models/IDonatOptions'
 import {
   Component,
   EventEmitter,
@@ -6,12 +7,19 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core'
+import { IDonat } from '../../models/IDonat'
 import { normalizeCommonJSImport } from '../../normalizeCommonJSImport'
 const loadHighcharts = normalizeCommonJSImport(import('highcharts'))
 
+//TODO: Cust to response method type
+type donatChartOptions = (
+  opt: IDonat,
+  size: string,
+  msg: string
+) => IDonatOptions
 @Component({
   selector: 'app-donat-chart',
-  template: `<div *ngIf="options && highcharts">
+  template: `<section *ngIf="options && highcharts">
     <highcharts-chart
       [Highcharts]="highcharts"
       [options]="pieChartOptions"
@@ -19,16 +27,16 @@ const loadHighcharts = normalizeCommonJSImport(import('highcharts'))
       [style.width]="maxWidth"
       [style.height]="maxHeight"
     ></highcharts-chart>
-  </div>`,
+  </section>`,
 })
 export class DonatChartComponent implements OnInit {
-  pieChartOptions: any | undefined
-  @Input() options: any | undefined
-  @Input() message: any | undefined
-  @Input() donatSize: any | undefined
-  @Input() mainFontsize: any | undefined
-  @Input() maxWidth: any | undefined
-  @Input() maxHeight: any | undefined
+  pieChartOptions!: any
+  @Input() options!: IDonat
+  @Input() message!: string
+  @Input() donatSize!: string
+  @Input() mainFontsize!: string
+  @Input() maxWidth!: string
+  @Input() maxHeight!: string
   @Output() userSelect = new EventEmitter<any>()
   highcharts: any
   constructor() {}
@@ -56,13 +64,12 @@ export class DonatChartComponent implements OnInit {
 
   emitValue(data: any) {
     const testType = data.point.name
-    const tcSuite = this.options.suite
     const tcStatus = data.point.status
-    this.userSelect.emit({ testType, tcSuite, tcStatus })
+    this.userSelect.emit({ testType, tcStatus })
   }
 
   setPieChartOptions = (
-    innerOptions: any,
+    innerOptions: IDonat,
     chartSize: string,
     message?: string
   ) => {

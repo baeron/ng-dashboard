@@ -1,0 +1,11 @@
+<select
+  id="selectedItem"
+  name="selectedItem"
+>
+  <option
+    *ngFor="let item of list"
+    [selected]="item === selectedItem"
+  >
+    {{ item }}
+  </option>
+</select>
