@@ -1,188 +1,27 @@
 <article>
   <section>
-    <ng-container  *ngIf="(branchList$ | async) as branchList; else loading">
+    <ng-container *ngIf="branchList$ | async as branchList; else loading">
       <app-select [list]="branchList"></app-select>
     </ng-container>
-    <ng-container  *ngIf="(buildList$ | async) as buildList; else loading">
+    <ng-container *ngIf="buildList$ | async as buildList; else loading">
       <app-select [list]="buildList" [isReverse]="true"></app-select>
     </ng-container>
   </section>
   <section class="d-flex">
-    <ng-container  *ngIf="(mainDonat$ | async) as mainDonat; else loading">
-      <app-donat-chart [options]="mainDonat"
-                      [donatSize]="mainDonatSize"
-                      [maxWidth]="mainDonatWidth"
-                      [maxHeight]="mainDonatHeight"
+    <ng-container *ngIf="mainDonat$ | async as mainDonat; else loading">
+      <app-donat-chart
+        [options]="mainDonat"
+        [donatSize]="mainDonatSize"
+        [maxWidth]="mainDonatWidth"
+        [maxHeight]="mainDonatHeight"
       ></app-donat-chart>
     </ng-container>
-    <ng-container  *ngIf="(miniDonatsList$ | async) as miniDonatsList; else loading">
+    <ng-container
+      *ngIf="miniDonatsList$ | async as miniDonatsList; else loading"
+    >
       <app-mini-donats [donats]="miniDonatsList"></app-mini-donats>
     </ng-container>
   </section>
 </article>
 
-<ng-template #loading>
-  loading...
-</ng-template>
-
-<!--
-<div class="d-board_table">
-  <ng-template [ngIf]="!donatChartClick && drillDownDataLoading" [ngIfElse]="emptyDataTable">
-    <div class="d-board_table_wrapper">
-    <div class="d-flex-content-center mt-20">
-      <ng-template [ngIf]="testEnvList" [ngIfElse]="noFieldsTableData">
-        <div class="mr-10 d-board_table_select" style="width: 240px;">
-          <label for="selectedBranchInTable">Branch</label>
-          <select
-            id="selectedBranchInTable"
-            class="select-drop-down d-board_table_select-item"
-            [attr.disabled]=true
-            name="selectedBranchInTable"
-          >
-            <option>{{selectedBranch}}</option>
-          </select>
-        </div>
-      </ng-template>
-
-      <ng-template [ngIf]="msoList" [ngIfElse]="noFieldsTableData">
-        <div class="mr-10 w-240p">
-          <label for="selectedBuildTable">Build</label>
-          <select
-            id="selectedBuildTable"
-            class="select-drop-down d-board_table_select-item"
-            [attr.disabled]=true
-            name="selectedBuildTable"
-          >
-            <option>{{ selectedBuild }}</option>
-          </select>
-        </div>
-      </ng-template>
-      <ng-template [ngIf]="platformList" [ngIfElse]="noFieldsTableData">
-        <div class="mr-10 w-240p">
-          <label for="selectedSuiteTable">Suite</label>
-          <select
-            id="selectedSuiteTable"
-            class="select-drop-down d-board_table_select-item"
-            [attr.disabled]=true
-            selectedSuiteName
-            name="selectedSuiteTable"
-          >
-            <option>{{ selectedTestCaseSuite }}</option>
-          </select>
-        </div>
-      </ng-template>
-    </div>
-    <div class="d-flex-content-center mt-20">
-      <ng-template [ngIf]="testEnvList" [ngIfElse]="noFieldsTableData">
-        <div class="mr-10 w-240p">
-          <label for="selectedTestEnvironment">Test Environment</label>
-          <select
-            id="selectedTestEnvironment"
-            class="select-drop-down"
-            [(ngModel)]="selectedTestEnv"
-            (ngModelChange)="onSelectTestEnvFields(selectedTestEnv)"
-            name="selectedTestEnvironment"
-          >
-            <option>All test environment</option>
-            <option
-              *ngFor="let itemTestEnv of testEnvList"
-              [ngValue]="itemTestEnv"
-              [selected]="itemTestEnv == selectedTestEnv"
-            >
-              {{ itemTestEnv }}
-            </option>
-          </select>
-        </div>
-      </ng-template>
-
-      <ng-template [ngIf]="msoList" [ngIfElse]="noFieldsTableData">
-        <div class="mr-10 w-240p">
-          <label for="selectedMso">MSO</label>
-          <select
-            id="selectedMso"
-            class="select-drop-down"
-            [(ngModel)]="selectedMso"
-            (ngModelChange)="onSelectMSOFields(selectedTestEnv, selectedMso)"
-            name="selectedBuild"
-          >
-            <option>{{ ALL_MSO }}</option>
-            <option
-              *ngFor="let itemMSO of msoList"
-              [ngValue]="itemMSO"
-              [selected]="itemMSO == selectedMso"
-            >
-              {{ itemMSO }}
-            </option>
-          </select>
-        </div>
-      </ng-template>
-      <ng-template [ngIf]="platformList" [ngIfElse]="noFieldsTableData">
-        <div class="mr-10 w-240p">
-          <label for="selectedPlatform">Platform</label>
-          <select
-            id="selectedPlatform"
-            class="select-drop-down"
-            [(ngModel)]="selectedPlatform"
-            (ngModelChange)="
-              onSelectPlatformFields(
-                selectedTestEnv,
-                selectedMso,
-                selectedPlatform
-              )
-            "
-            name="selectedPlatform"
-          >
-            <option>{{ ALL_PLATFORMS }}</option>
-            <option
-              *ngFor="let itemPlatform of platformList"
-              [ngValue]="itemPlatform"
-              [selected]="itemPlatform == selectedPlatform"
-            >
-              {{ itemPlatform }}
-            </option>
-          </select>
-        </div>
-      </ng-template>
-    </div>
-    <div class="d-flex-content-center">
-      <ng-template [ngIf]="drillDownData" [ngIfElse]="noTableData">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Test name</th>
-              <th>Test environment</th>
-              <th>Test MSO</th>
-              <th>Test platform</th>
-              <th>Test URL</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of drillDownData; index as i">
-              <td>{{ i + 1 }}</td>
-              <td>{{ item?.tc_name }}</td>
-              <td>{{ item?.test_environment }}</td>
-              <td>{{ item?.mso }}</td>
-              <td>{{ item?.platform }}</td>
-              <td>
-                <button
-                  class="table-btn"
-                  [ngClass]="{
-                    'btn-failer': jenkinsBtnColor === FAILURE_TEST,
-                    'btn-success': jenkinsBtnColor === SUCCESS_TEST,
-                    'btn-skip': jenkinsBtnColor === SKIP_TEST
-                  }"
-                  (click)="goToJenkinsPage(item.JENKINS_URL)"
-                >
-                  Jenkins link
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-template>
-    </div>
-  </div>
-  </ng-template>
-</div>
--->
+<ng-template #loading> loading... </ng-template>
